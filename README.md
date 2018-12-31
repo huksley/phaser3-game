@@ -1,3 +1,7 @@
+# Demo Game
+
+![Example screenshot](demo.png)
+
 ## Links
 
   * https://photonstorm.github.io/phaser3-docs/

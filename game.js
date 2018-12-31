@@ -63,12 +63,12 @@ function create() {
   }
 
   var lava = []
-  var platforms = this.physics.add.staticGroup();
 
   // Process lava
   for (var i = 0; i < this.map.objects.length; i++) {
     var o = this.map.objects[i];
     console.log("Object layer", o.name, "boxes", o.objects.length)
+    if (o && o.name == "lava")
     for (var j = 0; j < o.objects.length; j++) {
       var e = o.objects[j];
       if (e && e.rectangle && e.visible) {
@@ -76,11 +76,14 @@ function create() {
         var y = e.y
         var width = e.width
         var height = e.height
-        console.log("Collision box", e, x, y, width, height)
-        var s = platforms.create(x, y);
-        s.setSize(width, height);
-        s.setOrigin(0, 0)
-        s.setVisible(false)
+        console.trace("Collision box", e, e.x, e.y, e.width, e.height)
+        var s = this.add.graphics()
+        s.x = e.x;
+        s.y = e.y;
+        this.physics.add.existing(s);
+        s.body.setSize(width, height);
+        s.body.moves = false;
+        s.body.immovable = true
         lava[lava.length] = s;
       }
     }
@@ -91,7 +94,7 @@ function create() {
   player.setCollideWorldBounds(true);
   player.setBounce(0.2);
 
-  this.physics.add.collider(player, platforms);
+  this.physics.add.collider(player, lava);
 
   this.anims.create({
     key: "left",
