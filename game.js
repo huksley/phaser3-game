@@ -22,7 +22,11 @@ var cursors = null;
 var player = null;
 
 function preload() {
-  this.load.spritesheet("dude", "assets/animated-cleric.png", {
+  this.load.spritesheet("dude_old", "assets/animated-cleric.png", {
+    frameWidth: 32,
+    frameHeight: 32
+  });
+  this.load.spritesheet("dude", "assets/animated-warrior.png", {
     frameWidth: 32,
     frameHeight: 32
   });
@@ -30,7 +34,7 @@ function preload() {
   this.load.image("medieval-int", "assets/medieval-int.png");
   this.load.image("dungeon", "assets/dungeon.png");
   this.load.image("dungeon2", "assets/dungeon2.png");
-  this.load.tilemapTiledJSON("City", "assets/map-city.json");
+  this.load.tilemapTiledJSON("City", "assets/map-dungeon.json");
 }
 
 function create() {
@@ -55,6 +59,9 @@ function create() {
       pa[p[j].name] = p[j].value;
     }
     p = pa;
+    if (!p.tilesets) {
+      p.tilesets = "dungeon,dungeon2"
+    }
     var tilesets = p.tilesets.split(",");
     if (l.name != "player") {
       console.log("Loading layer", l.name, "properties", p, "tilesets", tilesets);
@@ -98,7 +105,7 @@ function create() {
 
   this.anims.create({
     key: "left",
-    frames: this.anims.generateFrameNumbers("dude", { start: 20, end: 26 }),
+    frames: this.anims.generateFrameNumbers("dude", { start: 21, end: 26 }),
     frameRate: 10,
     repeat: 0
   });
@@ -131,6 +138,6 @@ function update() {
   }
   player.setVelocity(x, y);
   if (anim != null) {
-    player.anims.play(anim, false);
+    player.anims.play(anim, true);
   }
 }
