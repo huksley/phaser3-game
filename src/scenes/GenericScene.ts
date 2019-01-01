@@ -7,6 +7,7 @@ export class GenericScene extends Phaser.Scene {
     private tilemap: string
     private key: string
     private updating: boolean = true
+    private pointer: Phaser.Input.Pointer
 
     constructor(key: string, tilemap: string, config?: Phaser.Scenes.Settings.Config) {
       super(config)
@@ -149,6 +150,7 @@ export class GenericScene extends Phaser.Scene {
       });
   
       this.cursors = this.input.keyboard.createCursorKeys();
+      this.pointer = this.input.activePointer
     }
 
     cleanup(): void {
@@ -163,33 +165,42 @@ export class GenericScene extends Phaser.Scene {
       }
 
       //console.log(`Updating ${this.key}`)
+
       this.player.setVelocity(0, 0);
       var x: integer = 0;
       var y: integer = 0;
       var anim: string = null;
-      if (this.cursors.left.isDown) {
-        x = -100;
-        anim = "left";
-        this.player.flipX = true;
-      }
-      if (this.cursors.right.isDown) {
-        x = 100;
-        anim = "left";
-        this.player.flipX = false;
-      }
-      if (this.cursors.up.isDown) {
-        y = -100;
-        anim = "left";
-      }
-      if (this.cursors.down.isDown) {
-        y = 100;
-        anim = "left";
-      }
-      this.player.setVelocity(x, y);
-      if (anim != null) {
-        this.player.anims.play(anim, true);
+
+      // Mouse, click, tap
+      if (this.pointer.primaryDown) {
+        this.physics.moveTo(this.player, this.pointer.downX, this.pointer.downY)
+        this.player.anims.play("left", true);
       } else {
-        this.player.anims.stop()
+        if (this.cursors.left.isDown) {
+          x = -100;
+          anim = "left";
+          this.player.flipX = true;
+        }
+        if (this.cursors.right.isDown) {
+          x = 100;
+          anim = "left";
+          this.player.flipX = false;
+        }
+        if (this.cursors.up.isDown) {
+          y = -100;
+          anim = "left";
+        }
+        if (this.cursors.down.isDown) {
+          y = 100;
+          anim = "left";
+        }
+        
+        this.player.setVelocity(x, y);
+        if (anim != null) {
+          this.player.anims.play(anim, true);
+        } else {
+          this.player.anims.stop()
+        }
       }
     }
   }
