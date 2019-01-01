@@ -18,7 +18,6 @@ module.exports = {
     ]
   },
   devtool: "cheap-source-map",
-  watch: true,
   devServer: {
     contentBase: path.resolve(__dirname, "./"),
     publicPath: "/build/",
@@ -34,8 +33,9 @@ module.exports = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      DEBUG: true
-    }),
+      GAME_DEBUG: true
+    })
+    /*,
     new HtmlWebpackPlugin({
       filename: "index.html",
       template: "./index.html",
@@ -52,6 +52,7 @@ module.exports = {
         removeEmptyAttributes: false
       },
       hash: false
-    })
+    })*/
   ]
-};
+}
+

@@ -1,7 +1,7 @@
 #game {
   display: block;
-  width: 400px;
-  height: 400px;
+  width: 800px;
+  height: 800px;
   overflow: hidden;
   border: 4px solid #d0d0d0;
 }

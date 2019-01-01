@@ -1,5 +1,7 @@
 import * as Phaser from "phaser";
 import { City } from "./scenes/City"
+import { Home } from "./scenes/Home"
+import { Dungeon } from "./scenes/Dungeon"
 
 const config = {
   type: Phaser.AUTO,
@@ -9,7 +11,7 @@ const config = {
   zoom: 4,
   parent: "game",
   autoResize: true,
-  scene: City,
+  scene: [ City, Home, Dungeon ],
   physics: {
     default: "arcade",
     arcade: {
@@ -17,7 +19,7 @@ const config = {
       gravity: { y: 0 }
     }
   }
-};
+}
 
 // game class
 export class Game extends Phaser.Game {
@@ -30,6 +32,7 @@ export class Game extends Phaser.Game {
     console.log("Boot");
     const c  = <HTMLCanvasElement> document.getElementById("game").childNodes[0]
     c.style.width = "800px";
+    c.style.height = "800px";
   }
 }
 

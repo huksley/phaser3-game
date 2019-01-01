@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tileset version="1.2" tiledversion="1.2.1" name="animated-warrior" tilewidth="32" tileheight="32" tilecount="100" columns="10">
  <image source="animated-warrior.png" width="320" height="320"/>
+ <tile id="29">
+  <animation>
+   <frame tileid="20" duration="100"/>
+   <frame tileid="21" duration="100"/>
+   <frame tileid="22" duration="100"/>
+   <frame tileid="23" duration="100"/>
+   <frame tileid="24" duration="100"/>
+   <frame tileid="25" duration="100"/>
+   <frame tileid="26" duration="100"/>
+   <frame tileid="27" duration="100"/>
+   <frame tileid="28" duration="100"/>
+  </animation>
+ </tile>
  <tile id="33">
   <animation>
    <frame tileid="90" duration="200"/>

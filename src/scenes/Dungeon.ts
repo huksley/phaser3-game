@@ -1,7 +1,7 @@
 import { GenericScene } from "./GenericScene";
 
-export class City extends GenericScene {
+export class Dungeon extends GenericScene {
   constructor(config?: Phaser.Scenes.Settings.Config) {
-    super("city", "assets/map-city.json", config)
+    super("dungeon", "assets/map-dungeon.json", config)
   }
 }

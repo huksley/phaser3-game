@@ -91,7 +91,7 @@
                  "value":"dungeon"
                 }],
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":25,
          "x":0,
          "y":0
@@ -122,70 +122,92 @@
          "name":"lava",
          "objects":[
                 {
-                 "height":199.667,
+                 "height":224,
                  "id":23,
                  "name":"8",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":105,
+                 "width":112,
                  "x":288,
                  "y":0
                 }, 
                 {
-                 "height":170.333,
+                 "height":176,
                  "id":24,
                  "name":"7",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":35,
-                 "x":362,
-                 "y":225.667
+                 "width":48,
+                 "x":352,
+                 "y":224
                 }, 
                 {
-                 "height":107,
+                 "height":112,
                  "id":25,
                  "name":"6",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":346,
+                 "width":352,
                  "x":0,
-                 "y":291
+                 "y":288
                 }, 
                 {
-                 "height":230,
+                 "height":256,
                  "id":28,
                  "name":"4",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":149.333,
+                 "width":156,
                  "x":0,
                  "y":0
                 }, 
                 {
-                 "height":206,
+                 "height":208,
                  "id":30,
                  "name":"3",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":131,
-                 "x":150.333,
-                 "y":0.333333
+                 "width":92,
+                 "x":180,
+                 "y":0
                 }, 
                 {
-                 "height":12.3333,
+                 "height":48.6666,
                  "id":31,
                  "name":"2",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":90.3333,
-                 "x":189,
-                 "y":218
+                 "width":108,
+                 "x":180,
+                 "y":208
+                }, 
+                {
+                 "height":16,
+                 "id":35,
+                 "name":"home",
+                 "rotation":0,
+                 "type":"scene:home",
+                 "visible":true,
+                 "width":16,
+                 "x":160,
+                 "y":224
+                }, 
+                {
+                 "height":16,
+                 "id":36,
+                 "name":"dungeon",
+                 "rotation":0,
+                 "type":"scene:dungeon",
+                 "visible":true,
+                 "width":16,
+                 "x":312,
+                 "y":249
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -194,7 +216,7 @@
          "y":0
         }],
  "nextlayerid":15,
- "nextobjectid":34,
+ "nextobjectid":37,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.2.1",
@@ -241,6 +263,48 @@
          "spacing":0,
          "tilecount":960,
          "tileheight":16,
+         "tiles":[
+                {
+                 "id":38,
+                 "objectgroup":
+                    {
+                     "draworder":"index",
+                     "name":"",
+                     "objects":[
+                            {
+                             "height":16,
+                             "id":1,
+                             "name":"",
+                             "rotation":0,
+                             "type":"",
+                             "visible":true,
+                             "width":16,
+                             "x":0,
+                             "y":0
+                            }],
+                     "opacity":1,
+                     "type":"objectgroup",
+                     "visible":true,
+                     "x":0,
+                     "y":0
+                    }
+                }, 
+                {
+                 "animation":[
+                        {
+                         "duration":250,
+                         "tileid":491
+                        }, 
+                        {
+                         "duration":250,
+                         "tileid":492
+                        }, 
+                        {
+                         "duration":250,
+                         "tileid":493
+                        }],
+                 "id":490
+                }],
          "tilewidth":16
         }, 
         {
