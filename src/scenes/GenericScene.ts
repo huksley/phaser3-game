@@ -18,6 +18,68 @@ export class GenericScene extends Phaser.Scene {
     }
   
     preload(): void {
+      const progressBar = this.add.graphics();
+      const progressBox = this.add.graphics();
+
+      var width = this.cameras.main.width;
+      var height = this.cameras.main.height;
+
+      progressBox.fillStyle(0x222222, 0.8);
+      progressBox.fillRect(width / 2 - 50, height / 2, 100, 30);
+
+      var loadingText = this.make.text({
+          x: width / 2,
+          y: height / 2 - 50,
+          text: 'Loading...',
+          style: {
+              font: '20px monospace',
+              fill: '#ffffff'
+          }
+      });
+      loadingText.setOrigin(0.5, 0.5);
+      
+      var percentText = this.make.text({
+          x: width / 2,
+          y: height / 2 - 20,
+          text: '0%',
+          style: {
+              font: '18px monospace',
+              fill: '#ffffff'
+          }
+      });
+      percentText.setOrigin(0.5, 0.5);
+      
+      var assetText = this.make.text({
+          x: width / 2,
+          y: height / 2 + 50,
+          text: '',
+          style: {
+              font: '18px monospace',
+              fill: '#ffffff'
+          }
+      });
+
+      assetText.setOrigin(0.5, 0.5);
+      
+      this.load.on('progress', function (value: integer) {
+          percentText.setText(String(Math.ceil(value * 100)) + '%');
+          progressBar.clear();
+          progressBar.fillStyle(0xffffff, 1);
+          progressBar.fillRect(width / 2 - 40, height / 2, 80, 30);
+      });
+      
+      this.load.on('fileprogress', function (file) {
+          assetText.setText('Loading asset: ' + file.key);
+      });
+
+      this.load.on('complete', function () {
+          progressBar.destroy();
+          progressBox.destroy();
+          loadingText.destroy();
+          percentText.destroy();
+          assetText.destroy();
+      });
+
       this.load.spritesheet("dude_old", "assets/animated-cleric.png", {
         frameWidth: 32,
         frameHeight: 32
@@ -146,11 +208,18 @@ export class GenericScene extends Phaser.Scene {
         key: "left",
         frames: this.anims.generateFrameNumbers("dude", { start: 21, end: 27 }),
         frameRate: 10,
-        repeat: 0
+        repeat: -1
       });
   
       this.cursors = this.input.keyboard.createCursorKeys();
       this.pointer = this.input.activePointer
+      this.input.on("pointerdown", _ => {
+        console.log("Down", arguments)
+        this.pointer.primaryDown = true
+      })
+      this.input.on("poinerup", _ => {
+        this.pointer.primaryDown = false
+      })
     }
 
     cleanup(): void {

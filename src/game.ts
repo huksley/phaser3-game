@@ -18,6 +18,9 @@ const config = {
       debug: false,
       gravity: { y: 0 }
     }
+  },
+  input: {
+    activePointers: 1
   }
 }
 
