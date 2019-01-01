@@ -122,7 +122,7 @@
          "name":"lava",
          "objects":[
                 {
-                 "height":199.666666666667,
+                 "height":199.667,
                  "id":23,
                  "name":"8",
                  "rotation":0,
@@ -161,7 +161,7 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":149.333333333333,
+                 "width":149.333,
                  "x":0,
                  "y":0
                 }, 
@@ -173,23 +173,23 @@
                  "type":"",
                  "visible":true,
                  "width":131,
-                 "x":150.333333333333,
-                 "y":0.333333333333343
+                 "x":150.333,
+                 "y":0.333333
                 }, 
                 {
-                 "height":12.3333333333333,
+                 "height":12.3333,
                  "id":31,
                  "name":"2",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":90.3333333333334,
+                 "width":90.3333,
                  "x":189,
                  "y":218
                 }],
          "opacity":1,
          "type":"objectgroup",
-         "visible":false,
+         "visible":true,
          "x":0,
          "y":0
         }],

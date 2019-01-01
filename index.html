@@ -1,17 +1,23 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="author" content="Huksley">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta http-equiv="cleartype" content="on">
+    <meta name="format-detection" content="telephone=no">
     <title>Game</title>
-    <script src="node_modules/phaser/dist/phaser-arcade-physics.js"></script>
-    <style type="text/css">
-      body {
-        margin: 0;
-      }
-    </style>
+    <link rel="stylesheet" type="text/css" href="src/game.css">
+    <script src="build/bundle.js"></script>
   </head>
-
   <body>
-    <script type="text/javascript" src="game.js"></script>
+    <div class="container">
+      <h1>Game</h1>
+      <div id="game-container">
+        <div id="game"></div>
+      </div>
+    </div>
   </body>
 </html>
