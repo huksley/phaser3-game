@@ -8,6 +8,11 @@ export class GenericScene extends Phaser.Scene {
     private key: string
     private updating: boolean = true
     private pointer: Phaser.Input.Pointer
+    private warping = false
+    private stopbox: Phaser.GameObjects.Graphics
+    private stopboxMaxDistance: number
+    private stopboxMinDistance: number
+    private stopboxDistance: number
 
     constructor(key: string, tilemap: string, config?: Phaser.Scenes.Settings.Config) {
       super(config)
@@ -97,6 +102,7 @@ export class GenericScene extends Phaser.Scene {
   
     create(): void {
       this.updating = true
+      this.warping = false
       this.map = this.add.tilemap(this.key);
       console.log("Loaded map", this.map);
   
@@ -191,17 +197,22 @@ export class GenericScene extends Phaser.Scene {
   
       this.physics.add.collider(this.player, lava);
       this.physics.add.collider(this.player, scenes, (player, scene) => {
-        console.log("Going", scene.getData("scene"))
-        const src = <GenericScene> scene.getData("sourceScene")
-        const cam = this.cameras.main
-        cam.fade(250, 0, 0, 0)
-        cam.once("camerafadeoutcomplete", () => {
-          const dst = <string> scene.getData("scene")
-          src.cleanup()
-          this.scene.pause(src.key)
-          this.scene.run(dst)
-          this.scene.bringToTop(dst)
-        })
+        if (!this.warping) {
+          this.warping = true
+          console.log("Going", scene.getData("scene"))
+          const src = <GenericScene> scene.getData("sourceScene")
+          const cam = this.cameras.main
+          cam.fade(250, 0, 0, 0)
+          cam.once("camerafadeoutcomplete", () => {
+            const dst = <string> scene.getData("scene")
+            src.cleanup()
+            this.scene.pause(src.key)
+            this.scene.run(dst)
+            this.scene.bringToTop(dst)
+          })
+        } else {
+          console.log("Already warping")
+        }
       })
 
       this.anims.create({
@@ -213,10 +224,41 @@ export class GenericScene extends Phaser.Scene {
   
       this.cursors = this.input.keyboard.createCursorKeys();
       this.pointer = this.input.activePointer
-      this.input.on("pointerdown", _ => {
-        console.log("Down", arguments)
-        this.pointer.primaryDown = true
+      
+      this.input.on("pointerdown", pointer => {
+        if (pointer && pointer.x && pointer.y) {
+          if (this.stopbox) {
+            this.stopbox.destroy()
+            this.stopbox = null
+            this.stopboxMaxDistance = undefined
+            this.stopboxMinDistance = undefined
+          }
+
+          this.physics.moveTo(this.player, pointer.x, pointer.y)
+          this.player.anims.play("left", true)
+
+          const z = this.add.graphics()
+          z.x = pointer.x
+          z.y = pointer.y
+          this.physics.add.existing(z)
+          const b = <BodyExt> z.body
+          b.setOffset(0, 0)
+          b.setSize(2, 2, false)
+          b.moves = false;
+          b.immovable = true;
+          this.stopbox = z
+          this.physics.add.collider(this.player, z, (player, scene) => {
+            console.log("Crash into stopbox")
+            this.player.setVelocity(0, 0)
+            this.player.anims.stop()
+            this.stopbox.destroy()
+            this.stopbox = null
+            this.stopboxMaxDistance = undefined
+            this.stopboxMinDistance = undefined
+          })
+        }
       })
+
       this.input.on("poinerup", _ => {
         this.pointer.primaryDown = false
       })
@@ -233,8 +275,29 @@ export class GenericScene extends Phaser.Scene {
         return
       }
 
-      //console.log(`Updating ${this.key}`)
+      if (this.stopbox) {
+        const dist = Math.sqrt(Math.pow(this.player.x - this.stopbox.x, 2) + Math.pow(this.player.y - this.stopbox.x, 2))
+        //console.log("Dist to stopbox: " + dist + ", max: " + this.stopboxMaxDistance + ", min: " + this.stopboxMinDistance);
+        this.stopboxDistance = dist
+        
+        if (this.stopboxMaxDistance === undefined || dist > this.stopboxMaxDistance) {
+          this.stopboxMaxDistance = dist
+        }
 
+        if (this.stopboxMinDistance === undefined || dist < this.stopboxMinDistance) {
+          this.stopboxMinDistance = dist
+        }
+
+        /*
+        console.log(this.stopboxMinDistance - dist, this.stopboxMaxDistance - dist)
+        if (this.stopboxMinDistance - dist != 0 && this.stopboxMinDistance - dist < 0.001) {
+          this.player.setVelocity(0, 0)
+        }
+        */
+      }
+
+      //console.log(`Updating ${this.key}`)
+/*
       this.player.setVelocity(0, 0);
       var x: integer = 0;
       var y: integer = 0;
@@ -271,6 +334,7 @@ export class GenericScene extends Phaser.Scene {
           this.player.anims.stop()
         }
       }
+    */
     }
   }
   
