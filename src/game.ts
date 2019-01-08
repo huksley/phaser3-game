@@ -4,6 +4,7 @@ import { Home } from "./scenes/Home"
 import { Dungeon } from "./scenes/Dungeon"
 import { Tunnel } from "./scenes/Tunnel"
 import { Fortress } from "./scenes/Fortress"
+import { ftch } from "./ftch"
 
 function firstScene() {
   var l = [ "city", "home", "dungeon", "tunnel", "fortress" ]
@@ -42,7 +43,7 @@ const config = {
   physics: {
     default: "arcade",
     arcade: {
-      debug: true, // Set to true to show physics boxes
+      debug: false, // Set to true to show physics boxes
       gravity: { y: 0 }
     }
   },
@@ -51,8 +52,11 @@ const config = {
   }
 }
 
+
+
 // game class
 export class Game extends Phaser.Game {
+  public git: any
   constructor(config: GameConfig) {
     super(config);
   }
@@ -63,6 +67,9 @@ export class Game extends Phaser.Game {
     const c  = <HTMLCanvasElement> document.getElementById("game").childNodes[0]
     c.style.width = "800px";
     c.style.height = "800px";
+    ftch("git.json").then(json => {
+      this.git = json
+    })
   }
 }
 

@@ -1,4 +1,5 @@
 import { ObjectLayerItem, LayerProperties, LayerProperty, BodyExt } from "../common"
+import { Game } from "../game"
 
 export class GenericScene extends Phaser.Scene {
     protected cursors: Phaser.Input.Keyboard.CursorKeys;
@@ -184,7 +185,8 @@ export class GenericScene extends Phaser.Scene {
           }
       }
 
-      this.add.text(0, 0, `Map: ${this.key}`, {
+      const game = <Game> this.game
+      this.add.text(0, 0, `Map: ${this.key} build: ${game.git['commit.id.abbrev']} ${game.git['build.time']}`, {
         font: "8px monospace",
         fill: "#000000",
         padding: { x: 2, y: 2 }

@@ -1,0 +1,15 @@
+# Prototype talk script
+approach:
+  # When avatar approaches NPC, what NPC says?
+  - "Hi, how are you?"
+  - "Welcome!"
+  - "Please help!"
+interact:
+  - nocat:
+      - say: "Please help, my cat have fallen down the well!"
+  - havecat:
+      - condition:
+          - player-inventory: cat
+      - take-inventory: cat
+      - say: "Thanks for the cat!"
+      - give-inventory: gold-coin

@@ -3,7 +3,7 @@
 # Creates git.json with repository and deployment information
 # NOTE: CodePipeline strips .git directory, so only git information available is commit.id from CODEBUILD_RESOLVED_SOURCE_VERSION env var
 # 
-DST=${1:-build}
+DST=${1:-.}
 if [ -d .git ]; then
     git log -1 --pretty=format:'{%n"commit.id": "%H",%n"commit.id.abbrev": "%h",%n"commit.user.name": "%an",%n"commit.user.email": "%ae",%n"commit.info":"%D",%n"commit.message": "%s",%n"commit.date": "%ai"%n}%n' | sed -E -e "s/^\* //g;s/^\| //g" > $DST/git.json
 else
