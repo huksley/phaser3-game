@@ -38,6 +38,6 @@
   <object id="4" x="14.6667" y="-0.666667" width="368" height="16"/>
   <object id="5" x="143.333" y="336.667" width="64" height="16.6667"/>
   <object id="7" x="191.333" y="353.333" width="15.3333" height="28"/>
-  <object id="9" name="Tunnel" type="scene:tunnel" x="16" y="367.333" width="16" height="14.6667"/>
+  <object id="9" name="Tunnel" type="scene:tunnel" x="16" y="368.667" width="16" height="13.3333"/>
  </objectgroup>
 </map>
