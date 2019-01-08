@@ -3,6 +3,9 @@
  <tileset firstgid="1" source="gervais.tsx"/>
  <tileset firstgid="15361" source="dungeon.tsx"/>
  <layer id="1" name="Tile Layer 1" width="25" height="25">
+  <properties>
+   <property name="tilesets" value="gervais,dungeon"/>
+  </properties>
   <data encoding="csv">
 11829,11830,11830,11830,11830,11830,11830,11830,11830,11830,11830,11830,11830,11830,11830,11830,11830,11830,11830,11830,11830,11830,11830,11830,11828,
 12083,15542,15542,15542,15542,15542,15542,15542,15542,15542,15542,15542,15542,15542,15542,15542,15542,15542,15542,15542,15542,15542,15542,15542,12086,

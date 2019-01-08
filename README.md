@@ -17,8 +17,12 @@
   * https://github.com/mikewesthad/phaser-3-tilemap-blog-posts/blob/master/examples/post-3/04-dungeon-final/
 
 
+ruby -rjson -ryaml -e "puts YAML.load(STDIN.read).to_json" < henry.yml  | json_pp
+
 ## Todo
-  * Fix mouse click / touch nav
+
+  * [x] Fix mouse click / touch nav
+  * [ ] Bring back keyboard nav
   * Minimap (http://www.html5gamedevs.com/topic/33204-cameras-in-v3/)
   * Implement smaller window and right/left/top/bottom side stats view
   * [x] Fix running speed change after changing locations

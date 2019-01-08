@@ -1,18 +1,20 @@
 import { ObjectLayerItem, LayerProperties, LayerProperty, BodyExt } from "../common"
 
 export class GenericScene extends Phaser.Scene {
-    private cursors: Phaser.Input.Keyboard.CursorKeys;
-    private player: Phaser.Physics.Arcade.Sprite;
-    private map: Phaser.Tilemaps.Tilemap;
-    private tilemap: string
-    private key: string
-    private updating: boolean = true
-    private pointer: Phaser.Input.Pointer
-    private warping = false
-    private stopbox: Phaser.GameObjects.Graphics
-    private stopboxMaxDistance: number
-    private stopboxMinDistance: number
-    private stopboxDistance: number
+    protected cursors: Phaser.Input.Keyboard.CursorKeys;
+    protected player: Phaser.Physics.Arcade.Sprite;
+    protected map: Phaser.Tilemaps.Tilemap;
+    protected tilemap: string
+    protected key: string
+    protected updating: boolean = true
+    protected pointer: Phaser.Input.Pointer
+    protected warping = false
+    protected stopbox: Phaser.GameObjects.Graphics
+    protected stopboxMaxDistance: number
+    protected stopboxMinDistance: number
+    protected stopboxDistance: number
+    protected startTileX = 10
+    protected startTileY = 16
 
     constructor(key: string, tilemap: string, config?: Phaser.Scenes.Settings.Config) {
       super(config)
@@ -97,6 +99,7 @@ export class GenericScene extends Phaser.Scene {
       this.load.image("medieval-int", "assets/medieval-int.png");
       this.load.image("dungeon", "assets/dungeon.png");
       this.load.image("dungeon2", "assets/dungeon2.png");
+      this.load.image("gervais", "assets/gervais.png");
       this.load.tilemapTiledJSON(this.key, this.tilemap);
     }
   
@@ -188,7 +191,7 @@ export class GenericScene extends Phaser.Scene {
       })
   
       // Add player
-      this.player = this.physics.add.sprite(10 * 16, 16 * 16, "dude")
+      this.player = this.physics.add.sprite(this.startTileX * 16, this.startTileY * 16, "dude")
       this.player.setCollideWorldBounds(true)
       this.player.setBounce(0.2)
       const pb = <BodyExt> this.player.body
@@ -209,6 +212,7 @@ export class GenericScene extends Phaser.Scene {
             this.scene.pause(src.key)
             this.scene.run(dst)
             this.scene.bringToTop(dst)
+            window.location.hash = "#" + dst
           })
         } else {
           console.log("Already warping")

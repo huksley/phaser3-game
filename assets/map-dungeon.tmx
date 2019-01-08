@@ -26,15 +26,15 @@
   </data>
  </layer>
  <objectgroup id="5" name="sword"/>
- <objectgroup id="3" name="lava" visible="0">
+ <objectgroup id="3" name="lava">
   <object id="3" x="2" y="1" width="396" height="14"/>
   <object id="5" x="242" y="15" width="156" height="113"/>
   <object id="6" x="384" y="129" width="16" height="270"/>
   <object id="7" x="2" y="15" width="13" height="385"/>
   <object id="9" x="16" y="383" width="368" height="15"/>
-  <object id="17" x="241" y="127" width="13" height="97"/>
-  <object id="18" x="254" y="206" width="33" height="18"/>
-  <object id="19" x="305" y="208" width="78" height="16"/>
+  <object id="17" x="240" y="127" width="16" height="97"/>
+  <object id="18" x="256" y="208" width="28" height="16"/>
+  <object id="19" x="308" y="208" width="75" height="16"/>
   <object id="22" name="city" type="scene:city" x="16" y="32" width="16" height="16"/>
   <object id="25" name="tunnel" type="scene:tunnel" x="368.667" y="144.417" width="14.6667" height="14.9167"/>
  </objectgroup>

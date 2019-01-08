@@ -5,6 +5,31 @@ import { Dungeon } from "./scenes/Dungeon"
 import { Tunnel } from "./scenes/Tunnel"
 import { Fortress } from "./scenes/Fortress"
 
+function firstScene() {
+  var l = [ "city", "home", "dungeon", "tunnel", "fortress" ]
+  var n = [ City, Home, Dungeon, Tunnel, Fortress ]
+  console.log("Scenes", l, n, "location", window.location.hash)
+  if (window.location.hash != "") {
+    var pick = -1
+    for (var i = 0; i < l.length; i++) {
+      if (window.location.hash == "#" + l[i]) {
+        pick = i
+        break
+      }
+    }
+    if (pick >= 0) {
+      const h = l[i]
+      const t = n[i]
+      console.log("Start with", h, t)
+      l.splice(i, 1)
+      n.splice(i, 1)
+      l.splice(0, 0, h)
+      n.splice(0, 0, t)
+    }
+  }
+  return n
+}
+
 const config = {
   type: Phaser.AUTO,
   width: 16 * 25,
@@ -13,11 +38,11 @@ const config = {
   zoom: 4,
   parent: "game",
   autoResize: true,
-  scene: [ City, Home, Dungeon, Tunnel, Fortress ],
+  scene: firstScene(),
   physics: {
     default: "arcade",
     arcade: {
-      debug: false,
+      debug: true, // Set to true to show physics boxes
       gravity: { y: 0 }
     }
   },

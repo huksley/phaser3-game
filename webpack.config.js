@@ -17,7 +17,7 @@ module.exports = {
       { test: /phaser\.js$/, loader: "expose-loader?Phaser" }
     ]
   },
-  devtool: "cheap-source-map",
+  devtool: "source-map",
   devServer: {
     contentBase: path.resolve(__dirname, "./"),
     publicPath: "/build/",
