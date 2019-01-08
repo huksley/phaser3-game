@@ -2,6 +2,8 @@ import * as Phaser from "phaser";
 import { City } from "./scenes/City"
 import { Home } from "./scenes/Home"
 import { Dungeon } from "./scenes/Dungeon"
+import { Tunnel } from "./scenes/Tunnel"
+import { Fortress } from "./scenes/Fortress"
 
 const config = {
   type: Phaser.AUTO,
@@ -11,7 +13,7 @@ const config = {
   zoom: 4,
   parent: "game",
   autoResize: true,
-  scene: [ City, Home, Dungeon ],
+  scene: [ City, Home, Dungeon, Tunnel, Fortress ],
   physics: {
     default: "arcade",
     arcade: {
