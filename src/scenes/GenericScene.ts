@@ -16,6 +16,7 @@ export class GenericScene extends Phaser.Scene {
     protected stopboxDistance: number
     protected startTileX = 10
     protected startTileY = 16
+    public game: Game
 
     constructor(key: string, tilemap: string, config?: Phaser.Scenes.Settings.Config) {
       super(config)
@@ -109,6 +110,7 @@ export class GenericScene extends Phaser.Scene {
       this.warping = false
       this.map = this.add.tilemap(this.key);
       console.log("Loaded map", this.map);
+      this.game.log("Entering " + this.key)
   
       // Tilesets
       var tilesets = {};
@@ -185,8 +187,7 @@ export class GenericScene extends Phaser.Scene {
           }
       }
 
-      const game = <Game> this.game
-      this.add.text(0, 0, `Map: ${this.key} build: ${game.git['commit.id.abbrev']} ${game.git['build.time']}`, {
+      this.add.text(0, 0, `Map: ${this.key} build: ${this.game.git['commit.id.abbrev']} ${this.game.git['build.time']}`, {
         font: "8px monospace",
         fill: "#000000",
         padding: { x: 2, y: 2 }

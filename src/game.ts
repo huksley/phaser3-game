@@ -5,6 +5,7 @@ import { Dungeon } from "./scenes/Dungeon"
 import { Tunnel } from "./scenes/Tunnel"
 import { Fortress } from "./scenes/Fortress"
 import { ftch } from "./ftch"
+import { UI } from "./UI";
 
 function firstScene() {
   var l = [ "city", "home", "dungeon", "tunnel", "fortress" ]
@@ -52,11 +53,11 @@ const config = {
   }
 }
 
-
-
 // game class
 export class Game extends Phaser.Game {
   public git: any
+  private ui: UI
+
   constructor(config: GameConfig) {
     super(config);
   }
@@ -70,6 +71,12 @@ export class Game extends Phaser.Game {
     ftch("git.json").then(json => {
       this.git = json
     })
+    this.ui = new UI()
+    this.ui.start()
+  }
+
+  log(s: string): void {
+    this.ui.log(s)
   }
 }
 
